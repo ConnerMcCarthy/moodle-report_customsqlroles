@@ -12,6 +12,10 @@ values can be entered before running the query.
 
 Scheduled reports can also be emailed automatically when they are generated.
 
+Original upstream plugin:
+
+- https://github.com/moodleou/moodle-report_customsql
+
 ## Installation
 
 Place this plugin in:
