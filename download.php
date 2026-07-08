@@ -31,7 +31,7 @@ $id = required_param('id', PARAM_INT);
 $csvtimestamp = required_param('timestamp', PARAM_INT);
 $dataformat = optional_param('dataformat', '', PARAM_ALPHA);
 
-$report = $DB->get_record('report_customsqlroles_queries', array('id' => $id));
+$report = $DB->get_record('report_csqlroles_queries', array('id' => $id));
 if (!$report) {
     print_error('invalidreportid', 'report_customsqlroles', report_customsqlroles_url('index.php'), $id);
 }

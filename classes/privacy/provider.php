@@ -48,7 +48,7 @@ class provider implements
      */
     public static function get_metadata(collection $items): collection {
         $items->add_database_table(
-            'report_customsqlroles_queries',
+            'report_csqlroles_queries',
             [
                 'displayname' => 'privacy:metadata:reportcustomsqlqueries:displayname',
                 'description' => 'privacy:metadata:reportcustomsqlqueries:description',
@@ -103,7 +103,7 @@ class provider implements
         if ($context->contextlevel === CONTEXT_SYSTEM) {
             // If we are checking system context, we need to get all distinct usermodified from the table.
             $sql = 'SELECT DISTINCT usermodified
-                      FROM {report_customsqlroles_queries}';
+                      FROM {report_csqlroles_queries}';
 
             $userlist->add_from_sql('usermodified', $sql, []);
         }
@@ -125,7 +125,7 @@ class provider implements
             // We only export from system context.
             if ($context->contextlevel === CONTEXT_SYSTEM) {
                 $records = $DB->get_records(
-                    'report_customsqlroles_queries',
+                    'report_csqlroles_queries',
                     ['usermodified' => $user->id],
                     'displayname'
                 );
@@ -174,7 +174,7 @@ class provider implements
 
         if ($context->contextlevel === CONTEXT_SYSTEM) {
             $adminuserid = get_admin()->id;
-            $DB->set_field('report_customsqlroles_queries', 'usermodified', $adminuserid);
+            $DB->set_field('report_csqlroles_queries', 'usermodified', $adminuserid);
         }
     }
 
@@ -193,7 +193,7 @@ class provider implements
                 $userid = $contextlist->get_user()->id;
                 $adminuserid = get_admin()->id;
 
-                $DB->set_field('report_customsqlroles_queries', 'usermodified',
+                $DB->set_field('report_csqlroles_queries', 'usermodified',
                     $adminuserid, ['usermodified' => $userid]);
             }
         }
@@ -214,7 +214,7 @@ class provider implements
             $userids = $userlist->get_userids();
             list($sqlcondition, $params) = $DB->get_in_or_equal($userids);
             $adminuserid = get_admin()->id;
-            $DB->set_field_select('report_customsqlroles_queries', 'usermodified', $adminuserid,
+            $DB->set_field_select('report_csqlroles_queries', 'usermodified', $adminuserid,
                  'usermodified ' . $sqlcondition, $params);
         }
     }

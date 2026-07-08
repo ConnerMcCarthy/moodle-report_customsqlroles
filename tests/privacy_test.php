@@ -95,12 +95,12 @@ class report_customsqlroles_privacy_testcase extends \core_privacy\tests\provide
         global $DB;
 
         $adminuserid = get_admin()->id;
-        $count = $DB->count_records('report_customsqlroles_queries', ['usermodified' => $adminuserid]);
+        $count = $DB->count_records('report_csqlroles_queries', ['usermodified' => $adminuserid]);
         $this->assertEquals(0, $count);
         provider::delete_data_for_all_users_in_context($this->systemcontext);
 
         // All records should be set usermodified to adminuserid.
-        $count = $DB->count_records('report_customsqlroles_queries', ['usermodified' => $adminuserid]);
+        $count = $DB->count_records('report_csqlroles_queries', ['usermodified' => $adminuserid]);
         $this->assertEquals(3, $count);
     }
 
@@ -110,12 +110,12 @@ class report_customsqlroles_privacy_testcase extends \core_privacy\tests\provide
     public function test_delete_data_for_user() {
         global $DB;
 
-        $count = $DB->count_records('report_customsqlroles_queries', ['usermodified' => $this->user1->id]);
+        $count = $DB->count_records('report_csqlroles_queries', ['usermodified' => $this->user1->id]);
         $this->assertEquals(1, $count);
         $contextlist = provider::get_contexts_for_userid($this->user1->id);
         $approvedcontextlist = new request\approved_contextlist($this->user1, $this->component, $contextlist->get_contextids());
         provider::delete_data_for_user($approvedcontextlist);
-        $count = $DB->count_records('report_customsqlroles_queries', ['usermodified' => $this->user1->id]);
+        $count = $DB->count_records('report_csqlroles_queries', ['usermodified' => $this->user1->id]);
         $this->assertEquals(0, $count);
     }
 
@@ -131,14 +131,14 @@ class report_customsqlroles_privacy_testcase extends \core_privacy\tests\provide
         $approvedlist = new request\approved_userlist($this->systemcontext, $this->component, $userlistids);
         provider::delete_data_for_users($approvedlist);
 
-        $count = $DB->count_records('report_customsqlroles_queries', ['usermodified' => $this->user1->id]);
+        $count = $DB->count_records('report_csqlroles_queries', ['usermodified' => $this->user1->id]);
         $this->assertEquals(0, $count);
-        $count = $DB->count_records('report_customsqlroles_queries', ['usermodified' => $this->user2->id]);
+        $count = $DB->count_records('report_csqlroles_queries', ['usermodified' => $this->user2->id]);
         $this->assertEquals(0, $count);
     }
 
     /**
-     * Create an entry in 'report_customsqlroles_queries' table and return the id
+     * Create an entry in 'report_csqlroles_queries' table and return the id
      *
      * @param int $userid
      * @return int the new query id.
@@ -150,7 +150,7 @@ class report_customsqlroles_privacy_testcase extends \core_privacy\tests\provide
         $report->displayname = $displayname;
         $report->description = 'test description';
         $report->descriptionformat = '1';
-        $report->querysql = 'SELECT * FROM {report_customsqlroles_queries} WHERE lastrun > 0';
+        $report->querysql = 'SELECT * FROM {report_csqlroles_queries} WHERE lastrun > 0';
         $report->queryparams = '';
         $report->querylimit = 10;
         $report->capability = 'report/customsqlroles:view';
@@ -165,6 +165,6 @@ class report_customsqlroles_privacy_testcase extends \core_privacy\tests\provide
         $report->timecreated = $time;
         $report->usermodified = $userid;
 
-        return $DB->insert_record('report_customsqlroles_queries', $report);
+        return $DB->insert_record('report_csqlroles_queries', $report);
     }
 }

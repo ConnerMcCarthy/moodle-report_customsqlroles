@@ -38,8 +38,8 @@ function xmldb_report_customsqlroles_upgrade($oldversion) {
 
     if ($oldversion < 2012011900) {
 
-        // Add field to report_customsqlroles_queries.
-        $table = new xmldb_table('report_customsqlroles_queries');
+        // Add field to report_csqlroles_queries.
+        $table = new xmldb_table('report_csqlroles_queries');
         if ($dbman->table_exists($table)) {
             // Define and add the field 'queryparams'.
             $field = new xmldb_field('queryparams', XMLDB_TYPE_TEXT, 'small', null, null, null, null, 'querysql');
@@ -53,8 +53,8 @@ function xmldb_report_customsqlroles_upgrade($oldversion) {
 
     if ($oldversion < 2012092400) {
 
-        // Add fields to report_customsqlroles_queries.
-        $table = new xmldb_table('report_customsqlroles_queries');
+        // Add fields to report_csqlroles_queries.
+        $table = new xmldb_table('report_csqlroles_queries');
         if ($dbman->table_exists($table)) {
 
             // Define and add the field 'at'.
@@ -79,7 +79,7 @@ function xmldb_report_customsqlroles_upgrade($oldversion) {
 
     if ($oldversion < 2013062300) {
         require_once($CFG->dirroot . '/report/customsqlroles/locallib.php');
-        $table = new xmldb_table('report_customsqlroles_queries');
+        $table = new xmldb_table('report_csqlroles_queries');
         $field = new xmldb_field('querylimit', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED,
                 XMLDB_NOTNULL, null, 5000, 'queryparams');
 
@@ -92,23 +92,23 @@ function xmldb_report_customsqlroles_upgrade($oldversion) {
 
     if ($oldversion < 2013102400) {
 
-        // Define table report_customsqlroles_categories to be created.
-        $table = new xmldb_table('report_customsqlroles_categories');
+        // Define table report_csqlroles_categories to be created.
+        $table = new xmldb_table('report_csqlroles_categories');
 
-        // Adding fields to table report_customsqlroles_categories.
+        // Adding fields to table report_csqlroles_categories.
         $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null, null);
         $table->add_field('name', XMLDB_TYPE_CHAR, '255', null, XMLDB_NOTNULL, null, null, null);
 
-        // Adding key to table report_customsqlroles_categories.
+        // Adding key to table report_csqlroles_categories.
         $table->add_key('primary', XMLDB_KEY_PRIMARY, array('id'));
 
-        // Conditionally launch create table for report_customsqlroles_categories.
+        // Conditionally launch create table for report_csqlroles_categories.
         if (!$dbman->table_exists($table)) {
             $dbman->create_table($table);
         }
 
-        // Define field categoryid to be added to report_customsqlroles_queries.
-        $table = new xmldb_table('report_customsqlroles_queries');
+        // Define field categoryid to be added to report_csqlroles_queries.
+        $table = new xmldb_table('report_csqlroles_queries');
         $field = new xmldb_field('categoryid', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED, null, null, null, 'emailwhat');
 
         // Conditionally launch add field categoryid.
@@ -117,17 +117,17 @@ function xmldb_report_customsqlroles_upgrade($oldversion) {
         }
 
         // Add key (for the new field just added).
-        $key = new xmldb_key('categoryid', XMLDB_KEY_FOREIGN, array('categoryid'), 'report_customsqlroles_categories', array('id'));
+        $key = new xmldb_key('categoryid', XMLDB_KEY_FOREIGN, array('categoryid'), 'report_csqlroles_categories', array('id'));
         $dbman->add_key($table, $key);
 
         // Create the default 'Miscellaneous' category.
         $category = new stdClass();
         $category->name = get_string('defaultcategory', 'report_customsqlroles');
-        if (!$DB->record_exists('report_customsqlroles_categories', array('name' => $category->name))) {
-            $category->id = $DB->insert_record('report_customsqlroles_categories', $category);
+        if (!$DB->record_exists('report_csqlroles_categories', array('name' => $category->name))) {
+            $category->id = $DB->insert_record('report_csqlroles_categories', $category);
         }
         // Update the existing query category ids, to move them into this category.
-        $sql = 'UPDATE {report_customsqlroles_queries} SET categoryid =' . $category->id;
+        $sql = 'UPDATE {report_csqlroles_queries} SET categoryid =' . $category->id;
         $DB->execute($sql);
 
         // Report savepoint reached.
@@ -137,7 +137,7 @@ function xmldb_report_customsqlroles_upgrade($oldversion) {
     // Repeat upgrade step that might have got missed on some branches.
     if ($oldversion < 2014020300) {
         require_once($CFG->dirroot . '/report/customsqlroles/locallib.php');
-        $table = new xmldb_table('report_customsqlroles_queries');
+        $table = new xmldb_table('report_csqlroles_queries');
         $field = new xmldb_field('querylimit', XMLDB_TYPE_INTEGER, '10', XMLDB_UNSIGNED,
                 XMLDB_NOTNULL, null, 5000, 'queryparams');
 
@@ -150,8 +150,8 @@ function xmldb_report_customsqlroles_upgrade($oldversion) {
 
     if ($oldversion < 2015062900) {
 
-        // Define field descriptionformat to be added to report_customsqlroles_queries.
-        $table = new xmldb_table('report_customsqlroles_queries');
+        // Define field descriptionformat to be added to report_csqlroles_queries.
+        $table = new xmldb_table('report_csqlroles_queries');
         $field = new xmldb_field('descriptionformat', XMLDB_TYPE_INTEGER, '4', null, XMLDB_NOTNULL, null, '1', 'description');
 
         // Conditionally launch add field descriptionformat.
@@ -165,8 +165,8 @@ function xmldb_report_customsqlroles_upgrade($oldversion) {
 
     if ($oldversion < 2016011800) {
 
-        // Define field customdir to be added to report_customsqlroles_queries.
-        $table = new xmldb_table('report_customsqlroles_queries');
+        // Define field customdir to be added to report_csqlroles_queries.
+        $table = new xmldb_table('report_csqlroles_queries');
         $field = new xmldb_field('customdir', XMLDB_TYPE_CHAR, '255', null, null, null, null, 'categoryid');
 
         if (!$dbman->field_exists($table, $field)) {
@@ -187,7 +187,7 @@ function xmldb_report_customsqlroles_upgrade($oldversion) {
 
         // Transfer data from old columns into details.
         // (There seem to be just a few thousand of these, so not too bad.)
-        $queries = $DB->get_records_select('report_customsqlroles_queries', 'emailto <> ?', [''], 'id', 'id, emailto');
+        $queries = $DB->get_records_select('report_csqlroles_queries', 'emailto <> ?', [''], 'id', 'id, emailto');
         $total = count($queries);
 
         if ($total > 0) {
@@ -217,7 +217,7 @@ function xmldb_report_customsqlroles_upgrade($oldversion) {
                 }
                 sort($queryuserids);
 
-                $DB->set_field('report_customsqlroles_queries', 'emailto', implode(',', $queryuserids), ['id' => $query->id]);
+                $DB->set_field('report_csqlroles_queries', 'emailto', implode(',', $queryuserids), ['id' => $query->id]);
                 $done += 1;
             }
             $progressbar->update($done, $total, "Updating ad-hoc DB query email recipients - {$done}/{$total}.");
@@ -228,8 +228,8 @@ function xmldb_report_customsqlroles_upgrade($oldversion) {
     }
 
     if ($oldversion < 2021051000) {
-        // Define field usermodified to be added to report_customsqlroles_queries.
-        $table = new xmldb_table('report_customsqlroles_queries');
+        // Define field usermodified to be added to report_csqlroles_queries.
+        $table = new xmldb_table('report_csqlroles_queries');
         $field = new xmldb_field('usermodified', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, null, '0', 'customdir');
 
         // Conditionally launch add field usermodified.
@@ -237,7 +237,7 @@ function xmldb_report_customsqlroles_upgrade($oldversion) {
             $dbman->add_field($table, $field);
         }
 
-        // Define field timecreated to be added to report_customsqlroles_queries.
+        // Define field timecreated to be added to report_csqlroles_queries.
         $field = new xmldb_field('timecreated', XMLDB_TYPE_INTEGER, '10', null,
                 XMLDB_NOTNULL, null, '0', 'usermodified');
 
@@ -246,7 +246,7 @@ function xmldb_report_customsqlroles_upgrade($oldversion) {
             $dbman->add_field($table, $field);
         }
 
-        // Define field timemodified to be added to report_customsqlroles_queries.
+        // Define field timemodified to be added to report_csqlroles_queries.
         $field = new xmldb_field('timemodified', XMLDB_TYPE_INTEGER, '10', null,
                 XMLDB_NOTNULL, null, '0', 'timecreated');
 
@@ -260,7 +260,7 @@ function xmldb_report_customsqlroles_upgrade($oldversion) {
     }
 
     if ($oldversion < 2021070701) {
-        $table = new xmldb_table('report_customsqlroles_queries');
+        $table = new xmldb_table('report_csqlroles_queries');
         $field = new xmldb_field('allowedroleids', XMLDB_TYPE_TEXT, null, null, null, null, null, 'capability');
 
         if (!$dbman->field_exists($table, $field)) {

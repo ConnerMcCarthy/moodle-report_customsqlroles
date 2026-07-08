@@ -36,15 +36,15 @@ admin_externalpage_setup('report_customsqlroles', '', ['id' => $id],
 $context = context_system::instance();
 require_capability('report/customsqlroles:managecategories', $context);
 
-$category = $DB->get_record('report_customsqlroles_categories', array('id' => $id));
+$category = $DB->get_record('report_csqlroles_categories', array('id' => $id));
 if (!$category) {
     print_error('invalidreportid', 'report_customsqlroles', report_customsqlroles_url('manage.php'), $id);
 }
 
 if (optional_param('confirm', false, PARAM_BOOL)) {
     require_sesskey();
-    if (!$queries = $DB->get_records('report_customsqlroles_queries', array('categoryid' => $id))) {
-        $ok = $DB->delete_records('report_customsqlroles_categories', array('id' => $id));
+    if (!$queries = $DB->get_records('report_csqlroles_queries', array('categoryid' => $id))) {
+        $ok = $DB->delete_records('report_csqlroles_categories', array('id' => $id));
         if (!$ok) {
             print_error('errordeletingcategory', 'report_customsqlroles', report_customsqlroles_url('index.php'));
         }

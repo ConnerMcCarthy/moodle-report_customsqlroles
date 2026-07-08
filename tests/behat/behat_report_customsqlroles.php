@@ -164,7 +164,7 @@ class behat_report_customsqlroles extends behat_base {
             $report['queryparams'] = serialize($params);
         }
 
-        $DB->insert_record('report_customsqlroles_queries', (object) $report);
+        $DB->insert_record('report_csqlroles_queries', (object) $report);
     }
 
     /**
@@ -175,7 +175,7 @@ class behat_report_customsqlroles extends behat_base {
      */
     public function the_custom_sql_report_cateogry_exists(string $name) {
         global $DB;
-        $DB->insert_record('report_customsqlroles_categories', (object) ['name' => $name]);
+        $DB->insert_record('report_csqlroles_categories', (object) ['name' => $name]);
     }
 
     /**
@@ -246,7 +246,7 @@ class behat_report_customsqlroles extends behat_base {
      */
     protected function get_report_by_name(string $reportname): stdClass {
         global $DB;
-        return $DB->get_record('report_customsqlroles_queries', ['displayname' => $reportname], '*', MUST_EXIST);
+        return $DB->get_record('report_csqlroles_queries', ['displayname' => $reportname], '*', MUST_EXIST);
     }
 
     /**
@@ -257,6 +257,6 @@ class behat_report_customsqlroles extends behat_base {
      */
     protected function get_category_id_by_name(string $name): int {
         global $DB;
-        return $DB->get_field('report_customsqlroles_categories', 'id', ['name' => $name], MUST_EXIST);
+        return $DB->get_field('report_csqlroles_categories', 'id', ['name' => $name], MUST_EXIST);
     }
 }

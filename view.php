@@ -29,7 +29,7 @@ require_once($CFG->libdir . '/adminlib.php');
 
 $id = required_param('id', PARAM_INT);
 $urlparams = ['id' => $id];
-$report = $DB->get_record('report_customsqlroles_queries', array('id' => $id));
+$report = $DB->get_record('report_csqlroles_queries', array('id' => $id));
 if (!$report) {
     print_error('invalidreportid', 'report_customsqlroles', report_customsqlroles_url('index.php'), $id);
 }
@@ -117,7 +117,7 @@ if ($report->runable == 'manual') {
     try {
         $csvtimestamp = report_customsqlroles_generate_csv($report, time());
         // Get the updated execution times.
-        $report = $DB->get_record('report_customsqlroles_queries', array('id' => $id));
+        $report = $DB->get_record('report_csqlroles_queries', array('id' => $id));
     } catch (Exception $e) {
         print_error('queryfailed', 'report_customsqlroles', report_customsqlroles_url('index.php'),
                     $e->getMessage());

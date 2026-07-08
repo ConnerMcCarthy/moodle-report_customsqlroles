@@ -151,7 +151,7 @@ function report_customsqlroles_generate_csv($report, $timenow) {
     $updaterecord->id = $report->id;
     $updaterecord->lastrun = time();
     $updaterecord->lastexecutiontime = round((microtime(true) - $starttime) * 1000);
-    $DB->update_record('report_customsqlroles_queries', $updaterecord);
+    $DB->update_record('report_csqlroles_queries', $updaterecord);
 
     // Report is runable daily, weekly or monthly.
     if ($report->runable != 'manual') {
@@ -368,11 +368,11 @@ function report_customsqlroles_log_view($id) {
  *
  * @param int $categoryid
  * @param string $type, type of report (manual, daily, weekly or monthly)
- * @return stdClass[] relevant rows from report_customsqlroles_queries.
+ * @return stdClass[] relevant rows from report_csqlroles_queries.
  */
 function report_customsqlroles_get_reports_for($categoryid, $type) {
     global $DB;
-    $records = $DB->get_records('report_customsqlroles_queries',
+    $records = $DB->get_records('report_csqlroles_queries',
         array('runable' => $type, 'categoryid' => $categoryid));
 
     return report_customsqlroles_sort_reports_by_displayname($records);
@@ -785,7 +785,7 @@ function report_customsqlroles_email_report($report, $csvfilename = null) {
 
 function report_customsqlroles_get_ready_to_run_daily_reports($timenow) {
     global $DB;
-    $reports = $DB->get_records_select('report_customsqlroles_queries', "runable = ?", array('daily'), 'id');
+    $reports = $DB->get_records_select('report_csqlroles_queries', "runable = ?", array('daily'), 'id');
 
     $reportstorun = array();
     foreach ($reports as $id => $r) {
@@ -847,7 +847,7 @@ function report_customsqlroles_is_daily_report_ready($report, $timenow) {
 
 function report_customsqlroles_category_options() {
     global $DB;
-    return $DB->get_records_menu('report_customsqlroles_categories', null, 'name ASC', 'id, name');
+    return $DB->get_records_menu('report_csqlroles_categories', null, 'name ASC', 'id, name');
 }
 
 /**
@@ -896,7 +896,7 @@ function report_customsqlroles_plain_text_report_name($report): string {
 /**
  * Returns all reports for a given type sorted by report 'displayname'.
  *
- * @param array $records relevant rows from report_customsqlroles_queries
+ * @param array $records relevant rows from report_csqlroles_queries
  * @return array
  */
 function report_customsqlroles_sort_reports_by_displayname(array $records): array {

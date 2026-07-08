@@ -36,8 +36,8 @@ function xmldb_report_customsqlroles_install() {
     // Create the default 'Miscellaneous' category.
     $category = new stdClass();
     $category->name = get_string('defaultcategory', 'report_customsqlroles');
-    if (!$DB->record_exists('report_customsqlroles_categories', array('name' => $category->name))) {
-        $DB->insert_record('report_customsqlroles_categories', $category);
+    if (!$DB->record_exists('report_csqlroles_categories', array('name' => $category->name))) {
+        $DB->insert_record('report_csqlroles_categories', $category);
     }
 
     return true;

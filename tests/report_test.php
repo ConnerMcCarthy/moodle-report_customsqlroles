@@ -190,7 +190,7 @@ class report_customsqlroles_report_testcase extends advanced_testcase {
         $lastrun = $today;
         $timestamp = $lastrun - ($today - $yesterday);
         $id = $this->create_a_database_row('daily', $currenthour, $lastrun, null);
-        $report = $DB->get_record('report_customsqlroles_queries', array('id' => $id));
+        $report = $DB->get_record('report_csqlroles_queries', array('id' => $id));
         $this->assertFalse(report_customsqlroles_is_daily_report_ready($report, $timestamp));
 
         // Test entry 2.
@@ -199,7 +199,7 @@ class report_customsqlroles_report_testcase extends advanced_testcase {
         $lastrun = $yesterday;
         $timestamp = $today;
         $id = $this->create_a_database_row('daily', $currenthour - 1, $lastrun, null);
-        $report = $DB->get_record('report_customsqlroles_queries', array('id' => $id));
+        $report = $DB->get_record('report_csqlroles_queries', array('id' => $id));
         $this->assertTrue(report_customsqlroles_is_daily_report_ready($report, $timestamp));
 
         // Test entry 3.
@@ -208,7 +208,7 @@ class report_customsqlroles_report_testcase extends advanced_testcase {
         $lastrun = $yesterday;
         $timestamp = $today;
         $id = $this->create_a_database_row('daily', $currenthour, $lastrun, null);
-        $report = $DB->get_record('report_customsqlroles_queries', array('id' => $id));
+        $report = $DB->get_record('report_csqlroles_queries', array('id' => $id));
         $this->assertTrue(report_customsqlroles_is_daily_report_ready($report, $timestamp));
 
         // Test entry 4.
@@ -217,7 +217,7 @@ class report_customsqlroles_report_testcase extends advanced_testcase {
         $lastrun = $yesterday;
         $timestamp = $today;
         $id = $this->create_a_database_row('daily', $currenthour + 1, $lastrun, null);
-        $report = $DB->get_record('report_customsqlroles_queries', array('id' => $id));
+        $report = $DB->get_record('report_csqlroles_queries', array('id' => $id));
         $this->assertFalse(report_customsqlroles_is_daily_report_ready($report, $timestamp));
 
         // Verify that two reports are returned - the two assertTrues above.
@@ -231,7 +231,7 @@ class report_customsqlroles_report_testcase extends advanced_testcase {
         list($elevenpm) = report_customsqlroles_get_daily_time_starts($timenow, 23);
         $timenow = $elevenpm;
         $id = $this->create_a_database_row('daily', 1, $oneam, null);
-        $report = $DB->get_record('report_customsqlroles_queries', array('id' => $id));
+        $report = $DB->get_record('report_csqlroles_queries', array('id' => $id));
         $this->assertFalse(report_customsqlroles_is_daily_report_ready($report, $timenow));
 
         // Test entry 6.
@@ -242,7 +242,7 @@ class report_customsqlroles_report_testcase extends advanced_testcase {
         list($notused, $fouramyesterday) = report_customsqlroles_get_daily_time_starts($timenow, 4);
         $timenow = $twoam;
         $id = $this->create_a_database_row('daily', 2, $fouramyesterday, null);
-        $report = $DB->get_record('report_customsqlroles_queries', array('id' => $id));
+        $report = $DB->get_record('report_csqlroles_queries', array('id' => $id));
         $this->assertTrue(report_customsqlroles_is_daily_report_ready($report, $timenow));
     }
 
@@ -382,7 +382,7 @@ class report_customsqlroles_report_testcase extends advanced_testcase {
         $user = $this->getDataGenerator()->create_user();
 
         $id = $this->create_a_database_row('daily', 2, 1, $user->id);
-        $report = $DB->get_record('report_customsqlroles_queries', ['id' => $id]);
+        $report = $DB->get_record('report_csqlroles_queries', ['id' => $id]);
 
         // Give our test user the capability to view the report.
         $userrole = $DB->get_record('role', ['shortname' => 'user']);
@@ -437,7 +437,7 @@ class report_customsqlroles_report_testcase extends advanced_testcase {
     }
 
     /**
-     * Create an entry in 'report_customsqlroles_queries' table and return the id
+     * Create an entry in 'report_csqlroles_queries' table and return the id
      *
      * @param string $runable
      * @param string $at
@@ -451,7 +451,7 @@ class report_customsqlroles_report_testcase extends advanced_testcase {
         $report = new stdClass();
         $report->displayname = 'all users on this test';
         $report->description = 'test description';
-        $report->querysql = 'SELECT * FROM {report_customsqlroles_queries} WHERE lastrun > 0';
+        $report->querysql = 'SELECT * FROM {report_csqlroles_queries} WHERE lastrun > 0';
         $report->queryparams = '';
         $report->capability = 'report/customsqlroles:view';
         $report->lastrun = $lastrun;
@@ -462,6 +462,6 @@ class report_customsqlroles_report_testcase extends advanced_testcase {
         $report->emailwhat = 'emailnumberofrows';
         $report->categoryid = 1;
 
-        return $DB->insert_record('report_customsqlroles_queries', $report);
+        return $DB->insert_record('report_csqlroles_queries', $report);
     }
 }

@@ -43,7 +43,7 @@ admin_externalpage_setup('report_customsqlroles');
 $context = context_system::instance();
 require_capability('report/customsqlroles:view', $context);
 
-$categories = $DB->get_records('report_customsqlroles_categories', null, 'name ASC');
+$categories = $DB->get_records('report_csqlroles_categories', null, 'name ASC');
 $showcat = optional_param('showcat', 0, PARAM_INT);
 $hidecat = optional_param('hidecat', 0, PARAM_INT);
 if (!$showcat && count($categories) == 1) {

@@ -43,7 +43,7 @@ $reportquerysql = '';
 
 // Are we editing an existing report, or creating a new one.
 if ($id) {
-    $report = $DB->get_record('report_customsqlroles_queries', array('id' => $id));
+    $report = $DB->get_record('report_csqlroles_queries', array('id' => $id));
     if (!$report) {
         print_error('invalidreportid', 'report_customsqlroles', report_customsqlroles_url('index.php'), $id);
     }
@@ -109,7 +109,7 @@ if ($newreport = $mform->get_data()) {
         if (empty($report->timemodified)) {
             $newreport->timecreated = $newreport->timemodified;
         }
-        $ok = $DB->update_record('report_customsqlroles_queries', $newreport);
+        $ok = $DB->update_record('report_csqlroles_queries', $newreport);
         if (!$ok) {
             print_error('errorupdatingreport', 'report_customsqlroles',
                         report_customsqlroles_url('edit.php?id=' . $id));
@@ -117,7 +117,7 @@ if ($newreport = $mform->get_data()) {
 
     } else {
         $newreport->timecreated = $newreport->timemodified;
-        $id = $DB->insert_record('report_customsqlroles_queries', $newreport);
+        $id = $DB->insert_record('report_csqlroles_queries', $newreport);
         if (!$id) {
             print_error('errorinsertingreport', 'report_customsqlroles',
                         report_customsqlroles_url('edit.php'));

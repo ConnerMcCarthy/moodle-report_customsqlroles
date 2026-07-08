@@ -73,7 +73,7 @@ class report_customsqlroles_addcategory_form extends moodleform {
             if (!isset($data['id'])) {
                 $data['id'] = 0;// Ensure id to check against.
             }
-            if ($DB->get_record_select('report_customsqlroles_categories',
+            if ($DB->get_record_select('report_csqlroles_categories',
                     'name = ? AND id != ?', array($data['name'], $data['id']))) {
                 $errors['name'] = get_string('categoryexists', 'report_customsqlroles');
             }

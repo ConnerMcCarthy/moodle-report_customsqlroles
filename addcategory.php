@@ -47,7 +47,7 @@ if ($id) {
     $queryparams['categoryid'] = $id;
     $isadding = false;
     // Editing an existing category.
-    $category = $DB->get_record('report_customsqlroles_categories',
+    $category = $DB->get_record('report_csqlroles_categories',
             array('id' => $id), '*', MUST_EXIST);
 } else {
     $queryparams['categoryid'] = null;
@@ -62,12 +62,12 @@ if ($mform->is_cancelled()) {
 
 if ($data = $mform->get_data()) {
     if ($isadding) {
-        $DB->insert_record('report_customsqlroles_categories', $data);
+        $DB->insert_record('report_csqlroles_categories', $data);
     } else {
         $updrec = new stdClass();
         $updrec->id = $data->id;
         $updrec->name = $data->name;
-        $DB->update_record('report_customsqlroles_categories', $updrec);
+        $DB->update_record('report_csqlroles_categories', $updrec);
     }
     redirect(report_customsqlroles_url('manage.php'));
 }

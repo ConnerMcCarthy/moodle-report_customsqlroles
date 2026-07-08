@@ -73,8 +73,8 @@ existing query.
 5) place your sql query in 'Query SQL' field. Note, the table name can be written
 in {} without the prefix or with the word 'prefix_' and not in {}. For instance,
 following queries are identical:
-q1) SELECT * FROM {report_customsqlroles_queries} csql WHERE csql.runable = 'manual'
-q2) SELECT * FROM perifx_report_customsqlroles_queries csql WHERE csql.runable = 'manual'
+q1) SELECT * FROM {report_csqlroles_queries} csql WHERE csql.runable = 'manual'
+q2) SELECT * FROM perifx_report_csqlroles_queries csql WHERE csql.runable = 'manual'
 
 6) Press 'Verify the Query SQL text and update the form' button if you have used
 parameters in your query. Then the parameter fields will appear for their values
@@ -109,8 +109,8 @@ existing query.
 5) place your sql query in 'Query SQL' field. Note, the table name can be written
 in {} without the prefix or with the word 'prefix_' and not in {}. For instance,
 following queries are identical:
-q1) SELECT * FROM {report_customsqlroles_queries} csql WHERE csql.runable = 'manual'
-q2) SELECT * FROM perifx_report_customsqlroles_queries csql WHERE csql.runable = 'manual'
+q1) SELECT * FROM {report_csqlroles_queries} csql WHERE csql.runable = 'manual'
+q2) SELECT * FROM perifx_report_csqlroles_queries csql WHERE csql.runable = 'manual'
 
 6) Press 'Verify the Query SQL text and update the form' button if you have used
 parameters in your query. Then the parameter fields will appear for their values

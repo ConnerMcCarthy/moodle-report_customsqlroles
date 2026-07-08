@@ -36,7 +36,7 @@ class query_edited extends \core\event\base {
     protected function init() {
         $this->data['crud'] = 'u';
         $this->data['edulevel'] = self::LEVEL_OTHER;
-        $this->data['objecttable'] = 'report_customsqlroles_queries';
+        $this->data['objecttable'] = 'report_csqlroles_queries';
     }
 
     public static function get_name() {

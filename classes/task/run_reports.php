@@ -72,7 +72,7 @@ class run_reports extends \core\task\scheduled_task {
         $dailyreportstorun = report_customsqlroles_get_ready_to_run_daily_reports($timenow);
 
         // Get weekly and monthly scheduled reports.
-        $scheduledreportstorun = $DB->get_records_select('report_customsqlroles_queries',
+        $scheduledreportstorun = $DB->get_records_select('report_csqlroles_queries',
                                             "(runable = 'weekly' AND lastrun < :startofthisweek) OR
                                              (runable = 'monthly' AND lastrun < :startofthismonth)",
                                             array('startofthisweek' => $startofthisweek,

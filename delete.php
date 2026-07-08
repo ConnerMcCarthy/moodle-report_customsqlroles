@@ -33,13 +33,13 @@ admin_externalpage_setup('report_customsqlroles', '', ['id' => $id],
 $context = context_system::instance();
 require_capability('report/customsqlroles:definequeries', $context);
 
-$report = $DB->get_record('report_customsqlroles_queries', array('id' => $id));
+$report = $DB->get_record('report_csqlroles_queries', array('id' => $id));
 if (!$report) {
     print_error('invalidreportid', 'report_customsqlroles', report_customsqlroles_url('index.php'), $id);
 }
 
 if (optional_param('confirm', false, PARAM_BOOL)) {
-    $ok = $DB->delete_records('report_customsqlroles_queries', array('id' => $id));
+    $ok = $DB->delete_records('report_csqlroles_queries', array('id' => $id));
     if (!$ok) {
         print_error('errordeletingreport', 'report_customsqlroles', report_customsqlroles_url('index.php'));
     }
