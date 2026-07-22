@@ -16,6 +16,14 @@ Original plugin repository:
 
 - https://github.com/moodleou/moodle-report_customsql
 
+## Compatibility
+
+- Minimum Moodle version: 3.9 (`2020061500`).
+- Expected to work with Moodle 3.9, 3.10, 3.11, 4.0, and 4.1.
+- Tested on Moodle 4.1.12 (Build: 20240812).
+- Moodle 4.2 and later, including Moodle 5.x, have not been verified with this release.
+- PHP and database requirements follow the requirements of the Moodle version being used.
+
 ## Installation
 
 Place this plugin in:
