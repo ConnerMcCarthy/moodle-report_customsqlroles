@@ -121,6 +121,7 @@ $string['privacy:metadata:reportcustomsqlqueries:querysql'] = 'The SQL to run to
 $string['privacy:metadata:reportcustomsqlqueries:queryparams'] = 'The SQL parameters to generate this report';
 $string['privacy:metadata:reportcustomsqlqueries:querylimit'] = 'Limit the number of results returned';
 $string['privacy:metadata:reportcustomsqlqueries:capability'] = 'The capability that a user needs to have to run this report';
+$string['privacy:metadata:reportcustomsqlqueries:allowedroleids'] = 'The system roles that are allowed to run this report';
 $string['privacy:metadata:reportcustomsqlqueries:lastrun'] = 'When this report was last run';
 $string['privacy:metadata:reportcustomsqlqueries:lastexecutiontime'] = 'Time this report took to run last time it was executed, in milliseconds';
 $string['privacy:metadata:reportcustomsqlqueries:runable'] = 'Runable \'manual\', \'weekly\' or \'monthly\'';

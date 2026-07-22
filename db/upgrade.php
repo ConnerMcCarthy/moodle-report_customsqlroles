@@ -270,5 +270,22 @@ function xmldb_report_customsqlroles_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2021070701, 'report', 'customsqlroles');
     }
 
+    if ($oldversion < 2026072200) {
+        // Shorten table names for databases with Moodle's 28-character name limit.
+        $oldcategories = new xmldb_table('report_customsqlroles_categories');
+        $newcategories = new xmldb_table('report_csqlroles_categories');
+        if ($dbman->table_exists($oldcategories) && !$dbman->table_exists($newcategories)) {
+            $dbman->rename_table($oldcategories, 'report_csqlroles_categories');
+        }
+
+        $oldqueries = new xmldb_table('report_customsqlroles_queries');
+        $newqueries = new xmldb_table('report_csqlroles_queries');
+        if ($dbman->table_exists($oldqueries) && !$dbman->table_exists($newqueries)) {
+            $dbman->rename_table($oldqueries, 'report_csqlroles_queries');
+        }
+
+        upgrade_plugin_savepoint(true, 2026072200, 'report', 'customsqlroles');
+    }
+
     return true;
 }

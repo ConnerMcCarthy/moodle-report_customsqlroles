@@ -38,8 +38,8 @@ if (!$report) {
 
 require_login();
 $context = context_system::instance();
-if (!empty($report->capability)) {
-    require_capability($report->capability, $context);
+if (!report_customsqlroles_user_can_access_query($report, $context)) {
+    throw new required_capability_exception($context, 'report/customsqlroles:view', 'nopermissions', '');
 }
 
 list($csvfilename) = report_customsqlroles_csv_filename($report, $csvtimestamp);

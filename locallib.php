@@ -27,7 +27,7 @@ defined('MOODLE_INTERNAL') || die();
 global $CFG;
 require_once($CFG->libdir . '/validateurlsyntax.php');
 
-define('REPORT_CUSTOMSQL_LIMIT_EXCEEDED_MARKER', '-- ROW LIMIT EXCEEDED --');
+define('REPORT_CUSTOMSQLROLES_LIMIT_EXCEEDED_MARKER', '-- ROW LIMIT EXCEEDED --');
 
 function report_customsqlroles_execute_query($sql, $params = null, $limitnum = null) {
     global $CFG, $DB;
@@ -140,7 +140,7 @@ function report_customsqlroles_generate_csv($report, $timenow) {
 
     if (!empty($handle)) {
         if ($count > $querylimit) {
-            report_customsqlroles_write_csv_row($handle, [REPORT_CUSTOMSQL_LIMIT_EXCEEDED_MARKER]);
+            report_customsqlroles_write_csv_row($handle, [REPORT_CUSTOMSQLROLES_LIMIT_EXCEEDED_MARKER]);
         }
 
         fclose($handle);

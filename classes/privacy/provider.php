@@ -57,6 +57,7 @@ class provider implements
                 'queryparams' => 'privacy:metadata:reportcustomsqlqueries:queryparams',
                 'querylimit' => 'privacy:metadata:reportcustomsqlqueries:querylimit',
                 'capability' => 'privacy:metadata:reportcustomsqlqueries:capability',
+                'allowedroleids' => 'privacy:metadata:reportcustomsqlqueries:allowedroleids',
                 'lastrun' => 'privacy:metadata:reportcustomsqlqueries:lastrun',
                 'lastexecutiontime' => 'privacy:metadata:reportcustomsqlqueries:lastexecutiontime',
                 'runable' => 'privacy:metadata:reportcustomsqlqueries:runable',

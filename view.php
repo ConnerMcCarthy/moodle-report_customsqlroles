@@ -177,7 +177,7 @@ if (is_null($csvtimestamp)) {
         $rowlimitexceeded = false;
         while ($row = report_customsqlroles_read_csv_row($handle)) {
             $data = report_customsqlroles_display_row($row, $linkcolumns);
-            if (isset($data[0]) && $data[0] === REPORT_CUSTOMSQL_LIMIT_EXCEEDED_MARKER) {
+            if (isset($data[0]) && $data[0] === REPORT_CUSTOMSQLROLES_LIMIT_EXCEEDED_MARKER) {
                 $rowlimitexceeded = true;
             } else {
                 $table->data[] = $data;
